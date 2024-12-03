@@ -1,0 +1,94 @@
+➜ make build_reg
+rm -f ExploreTheRegularLabyrinth.exe
+g++ -g -std=c++11 -Wall ExploreTheRegularLabyrinth.cpp -o ExploreTheRegularLabyrinth.exe
+➜ make run_reg
+./ExploreTheRegularLabyrinth.exe
+You have not escaped!
+➜ gdb ExploreTheRegularLabyrinth.exe
+GNU gdb (Ubuntu 15.0.50.20240403-0ubuntu1) 15.0.50.20240403-git
+Copyright (C) 2024 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from ExploreTheRegularLabyrinth.exe...
+(gdb) b ExploreTheRegularLabyrinth.cpp:15
+Breakpoint 1 at 0x29f9: file ExploreTheRegularLabyrinth.cpp, line 17.
+(gdb) r
+Starting program: /usercode/ExploreTheRegularLabyrinth.exe 
+warning: Error disabling address space randomization: Operation not permitted
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main () at ExploreTheRegularLabyrinth.cpp:17
+17          if (isPathToFreedom(start, kPathOutOfRegularMaze)) {
+(gdb) i locals 
+m = {_vptr.Maze = 0x5e10d778ec00 <vtable for Maze+16>, grid = {
+    _vptr.Grid = 0x5e10d778ec20 <vtable for Grid<MazeCell*>+16>, 
+    Rows = 0x5e10d9570300, NumRows = 4}, numRows = 4, numCols = 4, 
+  kNumTwistyRooms = 12}
+start = 0x5e10d9570520
+(gdb) p *start
+$1 = {whatsHere = "", north = 0x0, south = 0x0, east = 0x5e10d9570630, 
+  west = 0x0}
+(gdb) p * (start->east)
+$2 = {whatsHere = "", north = 0x0, south = 0x0, east = 0x5e10d9570680, 
+  west = 0x5e10d9570520}
+(gdb) p * (start->east->east)
+$3 = {whatsHere = "", north = 0x0, south = 0x5e10d95707c0, 
+  east = 0x5e10d95706d0, west = 0x5e10d9570630}
+(gdb) p * (start->east->east->east)
+$4 = {whatsHere = "", north = 0x0, south = 0x5e10d9570810, east = 0x0, 
+  west = 0x5e10d9570680}
+(gdb) p * (start->east->east->east->south)
+$5 = {whatsHere = "", north = 0x5e10d95706d0, south = 0x5e10d9570950, 
+  east = 0x0, west = 0x0}
+(gdb) p * (start->east->east->east->south->south)
+$6 = {whatsHere = "Potion", north = 0x5e10d9570810, south = 0x0, east = 0x0, 
+  west = 0x0}
+(gdb) p * (start->east->east->east->south->south->north)
+$7 = {whatsHere = "", north = 0x5e10d95706d0, south = 0x5e10d9570950, 
+  east = 0x0, west = 0x0}
+(gdb) p * (start->east->east->east->south->south->north->north)
+$8 = {whatsHere = "", north = 0x0, south = 0x5e10d9570810, east = 0x0, 
+  west = 0x5e10d9570680}
+(gdb) p * (start->east->east->east->south->south->north->north->west)
+$9 = {whatsHere = "", north = 0x0, south = 0x5e10d95707c0, 
+  east = 0x5e10d95706d0, west = 0x5e10d9570630}
+(gdb) p * (start->east->east->east->south->south->north->north->west->south)
+$10 = {whatsHere = "", north = 0x5e10d9570680, south = 0x0, east = 0x0, 
+  west = 0x5e10d9570770}                                                                                                                     st)db) p * (start->east->east->east->south->south->north->north->west->south->we) 
+$11 = {whatsHere = "", north = 0x0, south = 0x5e10d95708b0, 
+  east = 0x5e10d95707c0, west = 0x0}
+(gdb) p * (start->east->east->east->south->south->north->north->west->south->west->south)
+$12 = {whatsHere = "", north = 0x5e10d9570770, south = 0x0, 
+  east = 0x5e10d9570900, west = 0x5e10d9570860}
+(gdb) p * (start->east->east->east->south->south->north->north->west->south->west->south->west)
+$13 = {whatsHere = "", north = 0x5e10d9570720, south = 0x5e10d95709a0, 
+  east = 0x5e10d95708b0, west = 0x0}
+(gdb) p * (start->east->east->east->south->south->north->north->west->south->west->south->west->north)
+$14 = {whatsHere = "Spellbook", north = 0x0, south = 0x5e10d9570860, 
+  east = 0x0, west = 0x0}
+(gdb) p * (start->east->east->east->south->south->north->north->west->south->west->south->west->north->south)
+$15 = {whatsHere = "", north = 0x5e10d9570720, south = 0x5e10d95709a0, 
+  east = 0x5e10d95708b0, west = 0x0}
+(gdb) p * (start->east->east->east->south->south->north->north->west->south->west->south->west->north->south->south)
+$16 = {whatsHere = "", north = 0x5e10d9570860, south = 0x0, 
+  east = 0x5e10d95709f0, west = 0x0}
+(gdb) p * (start->east->east->east->south->south->north->north->west->south->west->south->west->north->south->south->east)
+$17 = {whatsHere = "", north = 0x0, south = 0x0, east = 0x5e10d9570a40, 
+  west = 0x5e10d95709a0}
+(gdb) p * (start->east->east->east->south->south->north->north->west->south->west->south->west->north->south->south->east->east)
+$18 = {whatsHere = "Wand", north = 0x0, south = 0x0, east = 0x5e10d9570a90, 
+  west = 0x5e10d95709f0}
+
+
